@@ -39,10 +39,10 @@
 
 .white {
     background: white;
-    color: red;
+    color: black;
 }
 
 .black {
     background: black;
-    color: red;
+    color: white;
 }

@@ -1,12 +1,16 @@
-import {createContext, useContext} from "react";
+import {createContext, useContext, useState} from "react";
 
-const ThemeContext = createContext('black')
+const ThemeContext = createContext(null)
 export default function Section() {
+
+    const [theme, setTheme] = useState('white')
+
     return (
-        <ThemeContext.Provider value="white">
+        <ThemeContext.Provider value={theme}>
             <Form title="a new form">
                 <Button>a</Button>
                 <Button>b</Button>
+                <DarkThemeCheckBox setTheme={setTheme} theme={theme}/>
             </Form>
         </ThemeContext.Provider>
     )
@@ -32,5 +36,16 @@ function Button({children}) {
     const theme = useContext(ThemeContext)
     return (
         <button className={theme}>{children}</button>
+    )
+}
+
+function DarkThemeCheckBox({theme, setTheme}) {
+    return (
+        <>
+            <input type="checkbox" checked={theme === 'black'} onChange={(e)=>{
+                setTheme(e.target.checked ? 'black' : 'white')
+            }}/>
+            <span>Use a Dark Theme</span>
+        </>
     )
 }
